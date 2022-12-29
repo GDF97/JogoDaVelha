@@ -1,0 +1,198 @@
+:root{
+    --cell-size: 20vh;
+    --mark-size: calc(var(--cell-size) * .9);
+}
+
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 90vh;
+}
+/******************Corpo do Jogo da Velha******************/
+.jogodavelha{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.cell{
+    border: 1px solid black;
+    width: var(--cell-size);
+    height: var(--cell-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3){
+
+    border-top: none;
+}
+
+.cell:last-child,
+.cell:nth-child(7),
+.cell:nth-child(8){
+    border-bottom: none;
+}
+
+.cell:nth-child(3n + 1){
+
+    border-left: none;
+}
+
+.cell:nth-child(3n){
+
+    border-right: none;
+}
+
+/******************Marcadores do Jogo da Velha (X e BOLINHA)******************/
+
+.cell.x::before,
+.cell.x::after{
+    content: '';
+    width: calc(var(--mark-size) * .15);
+    height: var(--mark-size);
+    background-color: rgb(255, 60, 60);
+    position: absolute;
+}
+
+.cell.x::before{
+    transform: rotate(45deg);
+}
+
+.cell.x::after{
+    transform: rotate(-45deg);
+}
+
+
+.cell.circle::before,
+.cell.circle::after{
+    content: '';
+    border-radius: 50%;
+    position: absolute;
+}
+
+.cell.circle::before{
+    height: var(--mark-size);
+    width: var(--mark-size);
+    background-color: rgb(54, 184, 245);
+}
+
+.cell.circle::after{
+    height: calc(var(--mark-size) * .7);
+    width: calc(var(--mark-size) * .7);
+    background-color: rgb(252, 252, 252);
+}
+
+/******************Efeitos Importantes******************/
+
+.cell.circle,
+.cell.x{
+    cursor: not-allowed;
+}
+
+.jogodavelha.x .cell:not(.x):not(.circle):hover::before,
+.jogodavelha.x .cell:not(.x):not(.circle):hover::after,
+.cell.x::before,
+.cell.x::after{
+    content: '';
+    width: calc(var(--mark-size) * .15);
+    height: var(--mark-size);
+    background-color: rgb(255, 60, 60);
+    position: absolute;
+}
+
+.jogodavelha.x  .cell:not(.x):not(.circle):hover::before,
+.cell.x::before{
+    transform: rotate(45deg);
+}
+
+.jogodavelha.x .cell:not(.x):not(.circle):hover::after,
+.cell.x::after{
+    transform: rotate(-45deg);
+}
+
+.jogodavelha.circle .cell:hover:not(.x):not(.circle)::before,
+.jogodavelha.circle .cell:hover:not(.x):not(.circle)::after,
+.cell.circle::before,
+.cell.circle::after{
+    content: '';
+    border-radius: 50%;
+    position: absolute;
+}
+
+.jogodavelha.circle .cell:not(.x):not(.circle):hover::before,
+.cell.circle::before{
+    height: var(--mark-size);
+    width: var(--mark-size);
+    background-color: rgb(54, 184, 245);
+}
+
+.jogodavelha.circle .cell:not(.x):not(.circle):hover::after,
+.cell.circle::after{
+    height: calc(var(--mark-size) * .7);
+    width: calc(var(--mark-size) * .7);
+    background-color: rgb(252, 252, 252);
+}
+
+/******************Mensagem de Ganhador******************/
+
+.mensagem{
+    visibility: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.712);
+    color: white;
+    font-size: 8rem;
+    flex-direction: column;
+}
+
+a{
+    font-size: 2rem;
+    padding: 2rem 4rem;
+    cursor: pointer;
+    border: 1px solid black;
+    text-decoration: none;
+    color: black;
+    background-color: white;
+}
+
+a:hover{
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+}
+
+.mensagem.show{
+    visibility: visible;
+ 
+
+}
+
+/******************Atualizações Futuras******************/
+
+.PlacarTitulo{
+    display: flex;
+    justify-content: center;
+}
+
+.jogadores{
+    display: flex;
+    justify-content: space-around;
+}
